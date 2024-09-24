@@ -22,7 +22,16 @@ class PostsService {
 
     async createPost(editablePostData) {
         const response = await api.post('api/posts', editablePostData)
-        logger.log(response)
+        logger.log(response.data)
+        const createdPost = new Post(response.data)
+        AppState.posts.unshift(createdPost)
+    }
+
+    async deletePost(Id) {
+        const response = await api.delete(`api/posts/${Id}`)
+        logger.log('Post Deleted', response.data)
+        const postIndex = AppState.posts.findIndex(post => post.id == Id)
+        AppState.posts.splice(postIndex, 1)
     }
 }
 
