@@ -19,7 +19,9 @@ function toggleTheme() {
 
 <template>
   <nav class="navbar navbar-expand-sm navbar-dark bg-dark px-3">
+    <router-link :to="{ name: 'Home' }">
     <h1 class="p-3">THE NETWORK</h1>
+  </router-link>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
       aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">

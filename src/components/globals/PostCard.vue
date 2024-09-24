@@ -26,6 +26,16 @@ async function deletePost() {
     }
 }
 
+async function likePost() {
+    try {
+        await postsService.likePost(props.postProp.id)
+      logger.log(props.postProp.id)
+    }
+    catch (error){
+      Pop.error(error);
+
+    }
+}
 </script>
 
 
@@ -43,7 +53,7 @@ async function deletePost() {
         <div class="d-flex justify-content-center">
             <img v-if="postProp.imgUrl" :src="postProp.imgUrl" alt="" class="post-img">
         </div>
-        <h1 class="text-end"><i class="mdi mdi-heart selectable"></i>{{ postProp.likes.length}}</h1>
+        <h1 @click="likePost()" class="text-end"><i class="mdi mdi-heart selectable"></i>{{ postProp.likes.length}}</h1>
         <button v-if="postProp.creatorId == account?.id" @click="deletePost()" class="btn btn-danger mt-5">DELETE</button>
     </div>
 

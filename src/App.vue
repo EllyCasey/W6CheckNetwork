@@ -1,6 +1,26 @@
 <script setup>
 import Navbar from './components/Navbar.vue';
 import { AppState } from './AppState.js';
+import { computed, onMounted } from 'vue';
+import { adsService } from './services/AdsService.js';
+import Pop from './utils/Pop.js';
+import AdsCard from './components/globals/AdsCard.vue';
+
+onMounted(() => {
+  displayAds()
+})
+
+const ads = computed(() => AppState.ads)
+
+async function displayAds() {
+  try {
+    await adsService.getAds()
+  }
+  catch (error){
+    Pop.error(error);
+  }
+}
+
 
 </script>
 
@@ -9,6 +29,9 @@ import { AppState } from './AppState.js';
     <Navbar />
   </header>
   <main>
+    <div class="" v-for="ad in ads" :key="ad.title">
+      <AdsCard :adsProp="ad"/>
+    </div>
     <router-view />
   </main>
 
