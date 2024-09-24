@@ -9,7 +9,7 @@ defineProps({
 
 
 <template>
-    <div class="col-8 post-card">
+    <div class="col-6 post-card">
         <div class="d-flex align-items-top">
             <router-link :to="{ name: 'Profile', params: { profileId: postProp.creatorId} }" :title="`Go to ${postProp.creator.name}'s Page`">
                 <img :src="postProp.creator.picture" alt="" class="creator-img">
@@ -19,7 +19,9 @@ defineProps({
         <p>{{ postProp.createdAt.toLocaleString() }}</p>
         <p><i class="mdi mdi-school"></i></p>
         <h5>{{ postProp.body }}</h5>
-        <img :src="postProp.imgUrl" alt="" class="post-img">
+        <div class="d-flex justify-content-center">
+            <img v-if="postProp.imgUrl" :src="postProp.imgUrl" alt="" class="post-img">
+        </div>
         <h1 class="text-end"><i class="mdi mdi-heart selectable"></i>{{ postProp.likes.length}}</h1>
     </div>
 
@@ -29,7 +31,7 @@ defineProps({
 
 <style lang="scss" scoped>
 .post-card {
-    background-color: #e8d5e2;
+    background-color: #e1d5e8;
     color: grey;
     padding: 1em;
     margin: 1.5em;
@@ -38,6 +40,7 @@ defineProps({
 img {
     object-fit: cover;
     object-position: center;
+    max-width: 80%;
 }
 
 .creator-img {

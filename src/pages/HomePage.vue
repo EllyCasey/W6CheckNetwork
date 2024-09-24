@@ -1,6 +1,7 @@
 <script setup>
 import { AppState } from '@/AppState.js';
 import PostCard from '@/components/globals/PostCard.vue';
+import PostForm from '@/components/globals/PostForm.vue';
 import { postsService } from '@/services/PostsService.js';
 import { logger } from '@/utils/Logger.js';
 import Pop from '@/utils/Pop.js';
@@ -28,8 +29,14 @@ async function getAllPosts() {
 
 <template>
 <div class="container-fluid">
-  <div class="row justify-content-center">
-    <div v-for="post in posts" :key="post.id">
+<section class="row justify-content-center">
+  <div class="col-8">
+    <PostForm />
+  </div>
+</section>
+
+  <div class="row">
+    <div v-for="post in posts" :key="post.id" class="col-12 d-flex justify-content-center">
       <PostCard :postProp="post" />
     </div>
   </div>
